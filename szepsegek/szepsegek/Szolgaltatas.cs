@@ -23,10 +23,10 @@ namespace szepsegek
             this.vendegId = vendegId;
         }
 
-        public int SzolgaltatasId { get => szolgaltatasId; set => szolgaltatasId = value; }
-        public string Tipusa { get => tipusa; set => tipusa = value; }
-        public int DolgozoId { get => dolgozoId; set => dolgozoId = value; }
-        public int Ar { get => ar; set => ar = value; }
-        public int VendegId { get => vendegId; set => vendegId = value; }
+        public int SzolgaltatasId { get => szolgaltatasId; }
+        public string Tipusa { get => tipusa; }
+        public int DolgozoId { get => dolgozoId; }
+        public int Ar { get => ar; }
+        public int VendegId { get => vendegId; }
     }
 }

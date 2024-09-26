@@ -19,8 +19,8 @@ namespace szepsegek
             this.telefonszam = telefonszam;
         }
 
-        public int DolgozoId { get => dolgozoId; set => dolgozoId = value; }
-        public int Fizetes { get => fizetes; set => fizetes = value; }
-        public int Telefonszam { get => telefonszam; set => telefonszam = value; }
+        public int DolgozoId { get => dolgozoId; }
+        public int Fizetes { get => fizetes; }
+        public int Telefonszam { get => telefonszam; }
     }
 }

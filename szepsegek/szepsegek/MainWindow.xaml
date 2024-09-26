@@ -7,6 +7,42 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.RowSpan="2">
+            <Button x:Name="btnUgyfelFelvetel" Content="Új ügyfél felvétele"/>
+        </StackPanel>
+        <DataGrid Grid.Column="1"/>
+        <DataGrid Grid.Column="1" x:Name="dtgVendegek">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding colId}"/>
+                <DataGridTextColumn Header="Név" Binding="{Binding }"/>
+                <DataGridTextColumn Header="Telefonszám" Binding="{Binding Column2Property}"/>
+                <!-- Add more columns as needed -->
+            </DataGrid.Columns>
+        </DataGrid>
+        <Popup x:Name="popupAddElement" Placement="Mouse" IsOpen="False">
+            <Grid Background="White" Width="200" Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Column 1:"/>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtNev"/>
+                <Label Grid.Row="1" Content="Column 2:"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtTelefon"/>
+                <Button Grid.Row="2" Content="Add" Click="btnAddElement_Click"/>
+            </Grid>
+        </Popup>
     </Grid>
 </Window>
