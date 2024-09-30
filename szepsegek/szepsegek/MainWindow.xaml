@@ -21,9 +21,9 @@
         <DataGrid Grid.Column="1"/>
         <DataGrid Grid.Column="1" x:Name="dtgVendegek">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding colId}"/>
-                <DataGridTextColumn Header="Név" Binding="{Binding }"/>
-                <DataGridTextColumn Header="Telefonszám" Binding="{Binding Column2Property}"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding VendegId}"/>
+                <DataGridTextColumn Header="Név" Binding="{Binding Nev}"/>
+                <DataGridTextColumn Header="Telefonszám" Binding="{Binding Telefonszam}"/>
                 <!-- Add more columns as needed -->
             </DataGrid.Columns>
         </DataGrid>

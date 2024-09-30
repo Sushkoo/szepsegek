@@ -26,7 +26,7 @@ namespace szepsegek
         public int VendegId { get => vendegId; }
         public string Nev { get => nev;}
         public string Telefonszam { get => telefonszam; }
-       //public int FoglalasId { get => foglalasId; }
+        //public int FoglalasId { get => foglalasId; }
         //public int SzolgaltatasId { get => szolgaltatasId; }
     }
 }

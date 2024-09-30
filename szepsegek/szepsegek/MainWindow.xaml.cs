@@ -17,6 +17,7 @@ namespace szepsegek
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Vendeg> Vendegek = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -32,10 +33,12 @@ namespace szepsegek
             // Create a new element with the values entered in the popup
             int IDindex = 0;
             Vendeg ujVendeg = new Vendeg(IDindex,txtNev.Text,txtTelefon.Text);
-            
+            IDindex++;
+            Vendegek.Add(ujVendeg);
 
+            dtgVendegek.ItemsSource = Vendegek;
             // Add the new element to the DataGrid
-            dtgVendegek.Items.Add(ujVendeg);
+            //dtgVendegek.Items.Add(ujVendeg);
 
             // Close the popup
             popupAddElement.IsOpen = false;
