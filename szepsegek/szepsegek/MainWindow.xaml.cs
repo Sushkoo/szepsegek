@@ -1,24 +1,13 @@
 ﻿using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
-using System.Windows.Automation;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace szepsegek
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public ObservableCollection<Ugyfel> Ugyfelek { get; set; }
+        private int IDindex = 0;
+
         public MainWindow()
         {
             Ugyfelek = new ObservableCollection<Ugyfel>();
@@ -26,12 +15,32 @@ namespace szepsegek
             InitializeComponent();
         }
 
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var loginPopup = new LoginPopup();
+            var popupWindow = new Window
+            {
+                Title = "Login",
+                Content = loginPopup,
+                SizeToContent = SizeToContent.WidthAndHeight,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            // Show the login window and wait for the dialog result
+            if (popupWindow.ShowDialog() == true) // We will set this true on successful login
+            {
+                // Show action buttons and hide login button
+                btnLogin.Visibility = Visibility.Collapsed;
+                btnUgyfelFelvetel.Visibility = Visibility.Visible;
+                ActionButtons.Visibility = Visibility.Visible;
+            }
+        }
+
         private void btnUgyfelFelvetel_Click(object sender, RoutedEventArgs e)
         {
             popupAddElement.IsOpen = true;
         }
 
-        int IDindex = 0;
         private void btnAddElement_Click(object sender, RoutedEventArgs e)
         {
             Ugyfel ujUgyfel = new Ugyfel
@@ -45,6 +54,24 @@ namespace szepsegek
             IDindex++;
 
             popupAddElement.IsOpen = false;
+        }
+
+        private void AddNew_Click(object sender, RoutedEventArgs e)
+        {
+            // Show the add customer popup
+            popupAddElement.IsOpen = true;
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit clicked!");
+            // Add logic for editing items
+        }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Remove clicked!");
+            // Add logic for removing items
         }
     }
 }
