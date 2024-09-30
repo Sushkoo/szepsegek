@@ -1,0 +1,29 @@
+
+
+Jogkörök:
+
+ügyfél/vendég: 
+	foglalas eleje-vege / elérhetõ idõpontok
+	milyen szolgaltatast kert / szolgaltatasok
+	melyik dolgozotol / dolgozók nevei
+	sajat adatai / ezt tudja szerkeszteni
+
+	login: name: vezeteknev.keresztnev
+			jelszo: 123
+
+			masik lehetoseg: regisztral
+
+dolgozo:
+	foglalas eleje-vege 
+	milyen szolgaltatast kértek
+	ugyfel adatok
+	sajat adatai / tudja szerkeszteni
+
+	login: name: dolgozovezeteknev.keresztnev
+			jelszo: dolgozoID
+
+admin:
+	mindenhez hozzáfér és tudja szerkeszteni
+
+	login: name: admin
+			jelszo: admin
