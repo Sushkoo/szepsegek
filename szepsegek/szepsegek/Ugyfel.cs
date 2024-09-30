@@ -8,15 +8,10 @@ namespace szepsegek
 {
     public class Ugyfel
     {
-
-
         public int UgyfelID { get; set; }
-        public string UgyfelVezetekNev { get; set; }
-        public string UgyfelKeresztNev { get; set; }
+        public string UgyfelNev { get; set; }
         public string UgyfelTelefon { get; set; }
         public string UgyfelEmail { get; set; }
-        public int UgyfelPontok { get; set; }
-
-
+        //public int UgyfelPontok { get; set; }
     }
 }

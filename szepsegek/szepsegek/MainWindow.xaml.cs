@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
@@ -17,9 +18,11 @@ namespace szepsegek
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Ugyfel> Vendegek = new();
+        public ObservableCollection<Ugyfel> Ugyfelek { get; set; }
         public MainWindow()
         {
+            Ugyfelek = new ObservableCollection<Ugyfel>();
+            DataContext = this;
             InitializeComponent();
         }
 
@@ -28,19 +31,19 @@ namespace szepsegek
             popupAddElement.IsOpen = true;
         }
 
+        int IDindex = 0;
         private void btnAddElement_Click(object sender, RoutedEventArgs e)
         {
-            // Create a new element with the values entered in the popup
-            int IDindex = 0;
-            Ugyfel ujVendeg = new Ugyfel(IDindex,txtNev.Text,txtTelefon.Text);
+            Ugyfel ujUgyfel = new Ugyfel
+            {
+                UgyfelID = IDindex,
+                UgyfelNev = txtNev.Text,
+                UgyfelTelefon = txtTelefon.Text,
+                UgyfelEmail = txtEmail.Text
+            };
+            Ugyfelek.Add(ujUgyfel);
             IDindex++;
-            Vendegek.Add(ujVendeg);
 
-            dtgVendegek.ItemsSource = Vendegek;
-            // Add the new element to the DataGrid
-            //dtgVendegek.Items.Add(ujVendeg);
-
-            // Close the popup
             popupAddElement.IsOpen = false;
         }
     }

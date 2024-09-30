@@ -16,32 +16,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.RowSpan="2">
-            <Button x:Name="btnUgyfelFelvetel" Content="Új ügyfél felvétele"/>
+            <Button x:Name="btnUgyfelFelvetel" Content="Új ügyfél felvétele" Click="btnUgyfelFelvetel_Click"/>
         </StackPanel>
-        <DataGrid Grid.Column="1"/>
-        <DataGrid Grid.Column="1" x:Name="dtgVendegek">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding VendegId}"/>
-                <DataGridTextColumn Header="Név" Binding="{Binding Nev}"/>
-                <DataGridTextColumn Header="Telefonszám" Binding="{Binding Telefonszam}"/>
-                <!-- Add more columns as needed -->
-            </DataGrid.Columns>
-        </DataGrid>
+        <DataGrid Grid.Column="1" x:Name="dtgUgyfelek" ItemsSource="{Binding Ugyfelek}"/>
         <Popup x:Name="popupAddElement" Placement="Mouse" IsOpen="False">
-            <Grid Background="White" Width="200" Height="100">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="Column 1:"/>
-                <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtNev"/>
-                <Label Grid.Row="1" Content="Column 2:"/>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtTelefon"/>
-                <Button Grid.Row="2" Content="Add" Click="btnAddElement_Click"/>
+            <Grid Background="White" Width="500" Height="300">
+                <StackPanel>
+                    <Label Grid.Row="0" Content="Név:"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtNev"/>
+                    <Label Grid.Row="1" Content="Telefon:"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtTelefon"/>
+                    <Label Grid.Row="1" Content="Email:"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtEmail"/>
+                    <Button Grid.Row="2" Content="Ügyfél Hozzáadása" Click="btnAddElement_Click"/>
+                </StackPanel>
             </Grid>
         </Popup>
     </Grid>
