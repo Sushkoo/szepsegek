@@ -31,6 +31,7 @@ namespace szepsegek
             {
                 // Show action buttons and hide login button
                 btnLogin.Visibility = Visibility.Collapsed;
+                dtgUgyfelek.Visibility = Visibility.Visible;
                 btnUgyfelFelvetel.Visibility = Visibility.Visible;
                 btnEdit.Visibility = Visibility.Visible;
                 btnRemove.Visibility = Visibility.Visible;
@@ -44,17 +45,25 @@ namespace szepsegek
 
         private void btnAddElement_Click(object sender, RoutedEventArgs e)
         {
-            Ugyfel ujUgyfel = new Ugyfel
+            if (txtNev.Text.Length == 0 || txtTelefon.Text.Length == 0 || txtEmail.Text.Length == 0)
             {
-                UgyfelID = IDindex,
-                UgyfelNev = txtNev.Text,
-                UgyfelTelefon = txtTelefon.Text,
-                UgyfelEmail = txtEmail.Text
-            };
-            Ugyfelek.Add(ujUgyfel);
-            IDindex++;
+                MessageBox.Show("Hibás adat(ok)!");
+            }
+            else
+            {
+                Ugyfel ujUgyfel = new Ugyfel
+                {
+                    UgyfelID = IDindex,
+                    UgyfelNev = txtNev.Text,
+                    UgyfelTelefon = txtTelefon.Text,
+                    UgyfelEmail = txtEmail.Text
+                };
+                Ugyfelek.Add(ujUgyfel);
+                IDindex++;
 
-            popupAddElement.IsOpen = false;
+                popupAddElement.IsOpen = false;
+            }
+
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)

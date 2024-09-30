@@ -24,7 +24,7 @@
             <Button x:Name="btnRemove" Content="Törlés" Width="100" Click="Remove_Click" Margin="5" Visibility="Collapsed"/>
         </StackPanel>
         
-        <DataGrid Grid.Column="1" x:Name="dtgUgyfelek" IsReadOnly="True" ItemsSource="{Binding Ugyfelek}"/>
+        <DataGrid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Visibility="Collapsed" x:Name="dtgUgyfelek" IsReadOnly="True" ItemsSource="{Binding Ugyfelek}"/>
         
         <Popup x:Name="popupAddElement" Placement="Mouse" IsOpen="False">
             <Grid Background="White" Width="500" Height="300">
