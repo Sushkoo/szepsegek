@@ -19,15 +19,12 @@
         
         <StackPanel Grid.RowSpan="2" x:Name="MainButtonPanel">
             <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click" Width="150" Margin="10"/>
-            <Button x:Name="btnUgyfelFelvetel" Content="Új ügyfél felvétele"  Click="btnUgyfelFelvetel_Click" Visibility="Collapsed" Width="150" Margin="10"/>
-            <StackPanel x:Name="ActionButtons" Visibility="Collapsed" Orientation="Horizontal" Margin="10">
-                <Button Content="Add New" Width="100" Click="AddNew_Click" Margin="5"/>
-                <Button Content="Edit" Width="100" Click="Edit_Click" Margin="5"/>
-                <Button Content="Remove" Width="100" Click="Remove_Click" Margin="5"/>
-            </StackPanel>
+            <Button x:Name="btnUgyfelFelvetel" Content="Új ügyfél felvétele" Click="btnUgyfelFelvetel_Click" Visibility="Collapsed" Width="150" Margin="10"/>
+            <Button x:Name="btnEdit" Content="Szerkesztés" Width="100" Click="Edit_Click" Margin="5" Visibility="Collapsed"/>
+            <Button x:Name="btnRemove" Content="Törlés" Width="100" Click="Remove_Click" Margin="5" Visibility="Collapsed"/>
         </StackPanel>
         
-        <DataGrid Grid.Column="1" x:Name="dtgUgyfelek" ItemsSource="{Binding Ugyfelek}"/>
+        <DataGrid Grid.Column="1" x:Name="dtgUgyfelek" IsReadOnly="True" ItemsSource="{Binding Ugyfelek}"/>
         
         <Popup x:Name="popupAddElement" Placement="Mouse" IsOpen="False">
             <Grid Background="White" Width="500" Height="300">

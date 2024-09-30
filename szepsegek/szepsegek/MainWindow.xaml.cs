@@ -32,7 +32,8 @@ namespace szepsegek
                 // Show action buttons and hide login button
                 btnLogin.Visibility = Visibility.Collapsed;
                 btnUgyfelFelvetel.Visibility = Visibility.Visible;
-                ActionButtons.Visibility = Visibility.Visible;
+                btnEdit.Visibility = Visibility.Visible;
+                btnRemove.Visibility = Visibility.Visible;
             }
         }
 
@@ -56,22 +57,32 @@ namespace szepsegek
             popupAddElement.IsOpen = false;
         }
 
-        private void AddNew_Click(object sender, RoutedEventArgs e)
-        {
-            // Show the add customer popup
-            popupAddElement.IsOpen = true;
-        }
-
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Edit clicked!");
-            // Add logic for editing items
+            if (dtgUgyfelek.IsReadOnly == true)
+            {
+                dtgUgyfelek.IsReadOnly = false;
+                btnEdit.Content = "Szerkesztés vége";
+                MessageBox.Show("Mostmár szerkeszthetőek az adatok!");
+            }
+            else
+            {
+                dtgUgyfelek.IsReadOnly = true;
+                btnEdit.Content = "Szerkesztés";
+                MessageBox.Show("Szerkesztés befejezve!");
+            }
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Remove clicked!");
-            // Add logic for removing items
+            if (dtgUgyfelek.SelectedItem is Ugyfel selectedUgyfel)
+            {
+                Ugyfelek.Remove(selectedUgyfel);
+            }
+            else
+            {
+                MessageBox.Show("Válassza ki a törölni kívánt ügyfelet!");
+            }
         }
     }
 }
