@@ -8,25 +8,14 @@ namespace szepsegek
 {
     public class Foglalas
     {
-        int foglalasId;
-        int idopont;
-        int vendegId;
-        int dolgozoId;
-        int szolgaltatasId;
 
-        public Foglalas(int foglalasId, int idopont, int vendegId, int dolgozoId, int szolgaltatasId)
-        {
-            this.foglalasId = foglalasId;
-            this.idopont = idopont;
-            this.vendegId = vendegId;
-            this.dolgozoId = dolgozoId;
-            this.szolgaltatasId = szolgaltatasId;
-        }
+        public int FoglalasID { get; set; }
+        public int SzolgaltatasID { get; set; }
+        public int DolgozoID { get; set; }
+        public int UgyfelID { get; set; }
+        public DateTime FoglalasKezdes { get; set; }
+        public DateTime FoglalasBefejezes { get; set; }
 
-        public int FoglalasId { get => foglalasId; }
-        public int Idopont { get => idopont;}
-        public int VendegId { get => vendegId; }
-        public int DolgozoId { get => dolgozoId; }
-        public int SzolgaltatasId { get => szolgaltatasId; }
+
     }
 }

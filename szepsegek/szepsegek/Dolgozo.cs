@@ -8,19 +8,14 @@ namespace szepsegek
 {
     public class Dolgozo
     {
-        int dolgozoId;
-        int fizetes;
-        int telefonszam;
+        public int DolgozoID { get; set; }
+        public string DolgozoVezetekNev { get; set; }
+        public string DolgozoKeresztNev { get; set; }
+        public string DolgozoTelefon { get; set; }
+        public string DolgozoEmail { get; set; }
+        public bool DolgozoStatusz { get; set; }
+        public int DolgozoSzolgaltatasa { get; set; }
 
-        public Dolgozo(int dolgozoId, int fizetes, int telefonszam)
-        {
-            this.dolgozoId = dolgozoId;
-            this.fizetes = fizetes;
-            this.telefonszam = telefonszam;
-        }
 
-        public int DolgozoId { get => dolgozoId; }
-        public int Fizetes { get => fizetes; }
-        public int Telefonszam { get => telefonszam; }
     }
 }
