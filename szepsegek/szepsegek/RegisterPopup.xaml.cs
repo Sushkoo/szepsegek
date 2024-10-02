@@ -17,13 +17,13 @@ namespace szepsegek
     /// <summary>
     /// Interaction logic for RegisterPopup.xaml
     /// </summary>
-    public partial class RegisterPopup : Window
+    public partial class RegisterPopup : UserControl
     {
-        List<User>felhasznalok=new List<User>();
-        public RegisterPopup()
-        {
-            InitializeComponent();
-        }
+            List<User>felhasznalok=new List<User>();
+            public RegisterPopup()
+            {
+                InitializeComponent();
+            }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
@@ -36,7 +36,7 @@ namespace szepsegek
             felhasznalo.UserPassword = password;
             if (felhasznalok.FindAll(x => x.UserName == felhasznalo.UserName).Count > 1)
             {
-                
+
             }
 
             // Simple validation example
@@ -57,6 +57,12 @@ namespace szepsegek
                     parentWindow.DialogResult = true; // Set dialog result to true
                     parentWindow.Close(); // Close the popup window
                 }
+                else
+                {
+                    // Handle the case where no parent window is found
+                    MessageBox.Show("No parent window found.");
+                }
             }
-    }
+        }
+    }   
 }
