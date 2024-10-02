@@ -96,11 +96,11 @@ namespace szepsegek
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            var loginPopup = new LoginPopup();
+            var registerPopup = new RegisterPopup();
             var popupWindow = new Window
             {
                 Title = "Login",
-                Content = loginPopup,
+                Content = registerPopup,
                 SizeToContent = SizeToContent.WidthAndHeight,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };

@@ -8,10 +8,7 @@ Jogkörök:
 	melyik dolgozotol / dolgozók nevei
 	sajat adatai / ezt tudja szerkeszteni
 
-	login: name: vezeteknev.keresztnev
-			jelszo: 123
-
-			masik lehetoseg: regisztral
+			regisztral
 
 dolgozo:
 	foglalas eleje-vege 
@@ -19,11 +16,10 @@ dolgozo:
 	ugyfel adatok
 	sajat adatai / tudja szerkeszteni
 
-	login: name: dolgozovezeteknev.keresztnev
-			jelszo: dolgozoID
+regisztal
 
 admin:
 	mindenhez hozzáfér és tudja szerkeszteni
 
 	login: name: admin
-			jelszo: admin
+			jelszo: password
