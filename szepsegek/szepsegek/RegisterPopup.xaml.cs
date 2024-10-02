@@ -19,11 +19,11 @@ namespace szepsegek
     /// </summary>
     public partial class RegisterPopup : UserControl
     {
-            List<User>felhasznalok=new List<User>();
-            public RegisterPopup()
-            {
-                InitializeComponent();
-            }
+        List<User> felhasznalok = new List<User>();
+        public RegisterPopup()
+        {
+            InitializeComponent();
+        }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
@@ -32,12 +32,20 @@ namespace szepsegek
 
             User felhasznalo = new User();
 
-            felhasznalo.UserName = username;
-            felhasznalo.UserPassword = password;
-            if (felhasznalok.FindAll(x => x.UserName == felhasznalo.UserName).Count > 1)
-            {
 
+
+            if (felhasznalok.FindAll(x => x.UserName == felhasznalo.UserName).Count > 0)
+            {
+                felhasznalo.UserName = username;
             }
+
+            if (felhasznalok.FindAll(x => x.UserPassword == felhasznalo.UserPassword).Count > 0)
+            {
+                felhasznalo.UserPassword = password;
+            }
+
+            int lastid = felhasznalok.Select(x => x.UserID).Last();
+            felhasznalo.UserID = lastid + 1;
 
             // Simple validation example
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
