@@ -1,19 +1,43 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace szepsegek
 {
-    public partial class LoginPopup : UserControl
+    /// <summary>
+    /// Interaction logic for RegisterPopup.xaml
+    /// </summary>
+    public partial class RegisterPopup : Window
     {
-        public LoginPopup()
+        List<User>felhasznalok=new List<User>();
+        public RegisterPopup()
         {
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
+
+            User felhasznalo = new User();
+
+            felhasznalo.UserName = username;
+            felhasznalo.UserPassword = password;
+            if (felhasznalok.FindAll(x => x.UserName == felhasznalo.UserName).Count > 1)
+            {
+                
+            }
 
             // Simple validation example
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -34,11 +58,5 @@ namespace szepsegek
                     parentWindow.Close(); // Close the popup window
                 }
             }
-
-            else
-            {
-                MessageBox.Show("Invalid credentials.");
-            }
-        }
     }
 }

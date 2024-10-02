@@ -93,5 +93,28 @@ namespace szepsegek
                 MessageBox.Show("Válassza ki a törölni kívánt ügyfelet!");
             }
         }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            var loginPopup = new LoginPopup();
+            var popupWindow = new Window
+            {
+                Title = "Login",
+                Content = loginPopup,
+                SizeToContent = SizeToContent.WidthAndHeight,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            // Show the login window and wait for the dialog result
+            if (popupWindow.ShowDialog() == true) // We will set this true on successful login
+            {
+                // Show action buttons and hide login button
+                btnLogin.Visibility = Visibility.Collapsed;
+                dtgUgyfelek.Visibility = Visibility.Visible;
+                btnUgyfelFelvetel.Visibility = Visibility.Visible;
+                btnEdit.Visibility = Visibility.Visible;
+                btnRemove.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
