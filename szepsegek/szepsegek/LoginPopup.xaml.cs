@@ -34,7 +34,7 @@ namespace szepsegek
                     parentWindow.Close(); // Close the popup window
                 }
             }
-
+            
          
 
 

@@ -14,12 +14,13 @@ using System.Windows.Shapes;
 
 namespace szepsegek
 {
+    
     /// <summary>
     /// Interaction logic for RegisterPopup.xaml
     /// </summary>
     public partial class RegisterPopup : UserControl
     {
-       List<User> felhasznalok = new List<User>();
+        public List<User> felhasznalok = new List<User>();
         public RegisterPopup()
         {
             InitializeComponent();
@@ -45,10 +46,6 @@ namespace szepsegek
             }
 
             Window parentWindow = Window.GetWindow(this);
-            
-
-            
-
             
 
             // Simple validation example

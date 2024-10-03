@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Windows;
 using System.Data.SqlClient;
+using MySqlConnector;
 
 namespace szepsegek
 {
@@ -17,58 +17,15 @@ namespace szepsegek
             Ugyfelek = new ObservableCollection<Ugyfel>();
             DataContext = this;
             InitializeComponent();
-            UgyfelekBetoltese();
+
+            string connectionString = "Server=localhost; Database=szepsegek; UserID=root; Password=;";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
         }
 
+        
 
-
-
-        private void UgyfelekBetoltese()
-        {
-            Ugyfelek = new ObservableCollection<Ugyfel>();
-
-            // Retrieve the connection string from App.config
-            string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    // Define the query to fetch Ugyfelek data
-                    string query = "SELECT UgyfelekId, Name, Email FROM Ugyfeleks";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        SqlDataReader reader = command.ExecuteReader();
-
-                        while (reader.Read())
-                        {
-                            // Read each record and add it to the ObservableCollection
-                            Ugyfel ujugyfel = new Ugyfel
-                            {
-                                UgyfelID = (int)reader["UgyfelekId"],
-                                UgyfelNev = reader["Name"].ToString(),
-                                UgyfelEmail = reader["Email"].ToString(),
-                                UgyfelTelefon = reader["Telefon"].ToString()
-                            };
-                            Ugyfelek.Add(ujugyfel);
-                        }
-                    }
-                }
-
-                // Bind the Ugyfeleks data to the ListView in the UI
-                dtgUgyfelek.ItemsSource = Ugyfelek;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
-        }
-    
-
-
+        
 
 
 
