@@ -19,7 +19,7 @@ namespace szepsegek
     /// </summary>
     public partial class RegisterPopup : UserControl
     {
-        List<User> felhasznalok = new List<User>();
+       List<User> felhasznalok = new List<User>();
         public RegisterPopup()
         {
             InitializeComponent();
@@ -44,8 +44,12 @@ namespace szepsegek
                 felhasznalo.UserPassword = password;
             }
 
-            int lastid = felhasznalok.Select(x => x.UserID).Last();
-            felhasznalo.UserID = lastid + 1;
+            Window parentWindow = Window.GetWindow(this);
+            
+
+            
+
+            
 
             // Simple validation example
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -54,23 +58,29 @@ namespace szepsegek
                 return; // Exit if either field is empty
             }
 
-            if (username == "admin" && password == "password")
-            {
-                MessageBox.Show("Login successful!");
 
-                // Find the parent window and set the dialog result
-                Window parentWindow = Window.GetWindow(this);
-                if (parentWindow != null)
-                {
-                    parentWindow.DialogResult = true; // Set dialog result to true
-                    parentWindow.Close(); // Close the popup window
-                }
-                else
-                {
-                    // Handle the case where no parent window is found
-                    MessageBox.Show("No parent window found.");
-                }
+            if (felhasznalok.Count() == 0)
+            {
+                felhasznalo.UserID = 0;
+                MessageBox.Show($"Sikeres regisztráció! {felhasznalo.UserID}");
+
             }
+            else
+            {
+                int lastid = felhasznalok.Select(x => x.UserID).Last();
+                felhasznalo.UserID = lastid + 1;
+                MessageBox.Show("Sikeres regisztráció!");
+            }
+
+            felhasznalok.Add(felhasznalo);
+
+            if (parentWindow != null)
+            {
+                parentWindow.DialogResult = true;
+                parentWindow.Close();
+            }
+
+
         }
     }   
 }
