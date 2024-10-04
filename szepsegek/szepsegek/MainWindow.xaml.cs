@@ -17,6 +17,7 @@ namespace szepsegek
         {
             Ugyfelek = new ObservableCollection<Ugyfel>();
             DataContext = this;
+            InitializeComponent();
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -32,7 +33,6 @@ namespace szepsegek
 
             try
             {
-                connection.Open();
                 LoadDtg();
 
                 foreach (Ugyfel item in Ugyfelek)
@@ -59,7 +59,6 @@ namespace szepsegek
             {
                 connection.Close();
             }
-            InitializeComponent();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
