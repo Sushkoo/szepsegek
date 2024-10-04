@@ -35,13 +35,7 @@ namespace szepsegek
             string username = UsernameTextBox.Text;
 
             string password = PasswordBox.Password;
-            byte[] salt = GenerateSalt();
-            string hashedPassword = HashPassword(password, salt);
-
-            byte[] GenerateSalt()
-            {
-                using (var rng = new RNGCryptoServiceProvider())
-            }
+            
 
             byte[] salt = GenerateSalt();
             string hashedPassword = HashPassword(password, salt);
