@@ -43,9 +43,9 @@ namespace szepsegek
 
                     MySqlCommand InsertCommand = new MySqlCommand(insertQuery, connection);
 
-                    InsertCommand.Parameters.AddWithValue("@column2", item.UgyfelNev);
-                    InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
-                    //InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
+                    InsertCommand.Parameters.AddWithValue("@UgyfelNev", item.UgyfelNev);
+                    InsertCommand.Parameters.AddWithValue("@UgyfelTelefon", item.UgyfelTelefon);
+                    InsertCommand.Parameters.AddWithValue("@UgyfelEmail", item.UgyfelEmail);
 
                     int affectedRows = InsertCommand.ExecuteNonQuery();
 
@@ -118,9 +118,9 @@ namespace szepsegek
 
                     MySqlCommand InsertCommand = new MySqlCommand(insertQuery, connection);
 
-                    InsertCommand.Parameters.AddWithValue("@column2", item.UgyfelNev);
-                    InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
-                   // InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
+                    InsertCommand.Parameters.AddWithValue("@UgyfelNev", item.UgyfelNev);
+                    InsertCommand.Parameters.AddWithValue("@UgyfelTelefon", item.UgyfelTelefon);
+                    InsertCommand.Parameters.AddWithValue("@UgyfelEmail", item.UgyfelEmail);
 
                     int affectedRows = InsertCommand.ExecuteNonQuery();
 
