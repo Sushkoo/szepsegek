@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
 
 namespace szepsegek
 {
@@ -32,6 +34,39 @@ namespace szepsegek
         {
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
+
+            byte[] salt = GenerateSalt();
+            string hashedPassword = HashPassword(password, salt);
+
+            // Step 2: Generate a Salt
+            byte[] GenerateSalt()
+            {
+                using (var rng = new RNGCryptoServiceProvider())
+                {
+                    var salt = new byte[16];
+                    rng.GetBytes(salt);
+                    return salt;
+                }
+            }
+
+            // Step 3: Hash the Password
+            string HashPassword(string password, byte[] salt)
+            {
+                using (var sha256 = SHA256.Create())
+                {
+                    var passwordBytes = Encoding.UTF8.GetBytes(password);
+                    var saltedPasswordBytes = Combine(passwordBytes, salt);
+                    var hashBytes = sha256.ComputeHash(saltedPasswordBytes);
+                    return Convert.ToBase64String(hashBytes);
+                }
+            }
+
+            // Step 4: Verify the Password
+            bool VerifyPassword(string providedPassword, string storedHash, byte[] storedSalt)
+            {
+                string hashedProvidedPassword = HashPassword(providedPassword, storedSalt);
+                return hashedProvidedPassword == storedHash;
+            }
 
             // Simple validation example
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -59,7 +94,7 @@ namespace szepsegek
 
                 command = new MySqlCommand("INSERT INTO users (username, password, UserJogkor) VALUES (@username, @password, @UserJogkor)", connection);
                 command.Parameters.AddWithValue("@username", username);
-                command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@password", hashedPassword);
                 command.Parameters.AddWithValue("@UserJogkor", "ugyfel");
 
                 command.ExecuteNonQuery();
