@@ -10,7 +10,7 @@ namespace szepsegek
 {
     public partial class MainWindow : Window
     {
-        string connectionString = "Server=localhost; Database=szepsegek; UserID=root; Password=;";
+        string connectionString = "Server=localhost; Database=szepsegek; UserID=root; Password=; Allow User Variables=true;";
         public ObservableCollection<Ugyfel> Ugyfelek;
         private int IDindex = 0;
 
