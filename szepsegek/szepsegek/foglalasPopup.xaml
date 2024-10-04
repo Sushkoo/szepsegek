@@ -8,8 +8,16 @@
         Title="foglalasPopup" Height="300" Width="300">
     <Grid>
         <Label Content="Szolgáltatások:" HorizontalAlignment="Left" Margin="31,53,0,0" VerticalAlignment="Top" Height="34" Width="93"/>
-        <ComboBox HorizontalAlignment="Left" Margin="129,59,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="129,97,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cbxSzolgaltatas" SelectionChanged="cbxSzolgaltatas_SelectionChanged" HorizontalAlignment="Left" Margin="129,59,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding SzolgaltatasKategoria}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox x:Name="cbxDolgozo" HorizontalAlignment="Left" Margin="129,97,0,0" VerticalAlignment="Top" Width="120">
+            
+        </ComboBox>
         <Label Content="Dolgozó:" HorizontalAlignment="Left" Margin="31,95,0,0" VerticalAlignment="Top" Width="80"/>
         <DatePicker HorizontalAlignment="Left" Margin="129,136,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Időpont:" HorizontalAlignment="Left" Margin="31,134,0,0" VerticalAlignment="Top" Width="64"/>
