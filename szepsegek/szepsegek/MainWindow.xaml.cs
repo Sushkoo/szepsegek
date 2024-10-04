@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using MySqlConnector;
 using System.Data;
 using System.Windows.Controls;
+using System.Security.Cryptography.X509Certificates;
 
 namespace szepsegek
 {
@@ -21,7 +22,7 @@ namespace szepsegek
             InitializeComponent();
         }
 
-    private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             var loginPopup = new LoginPopup();
             var popupWindow = new Window
@@ -71,24 +72,37 @@ namespace szepsegek
                 popupAddElement.IsOpen = false;
 
                 MySqlConnection connection = new MySqlConnection(connectionString);
+
+                void LoadDtg()
+                {
+                    string selectQuery = "SELECT * FROM ugyfel";
+                    MySqlCommand SelectCommand = new MySqlCommand(selectQuery, connection);
+                    MySqlDataReader reader = SelectCommand.ExecuteReader();
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(reader);
+                    dtgUgyfelek.ItemsSource = dataTable.DefaultView;
+                }
+
                 try
                 {
                     connection.Open();
+                    LoadDtg();
 
                     foreach (Ugyfel item in Ugyfelek)
                     {
-                        string query = "INSERT INTO Ugyfelek (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
+                        string insertQuery = "INSERT INTO ugyfel (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
 
-                        MySqlCommand command = new MySqlCommand(query, connection);
+                        MySqlCommand InsertCommand = new MySqlCommand(insertQuery, connection);
 
-                        command.Parameters.AddWithValue("@column2", item.UgyfelNev);
-                        command.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
-                        command.Parameters.AddWithValue("@column3", item.UgyfelEmail);
+                        InsertCommand.Parameters.AddWithValue("@column2", item.UgyfelNev);
+                        InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
+                        InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
 
-                        int affectedRows = command.ExecuteNonQuery();
+                        int affectedRows = InsertCommand.ExecuteNonQuery();
 
                         Console.WriteLine("Inserted " + affectedRows + " row(s)");
                     }
+                    LoadDtg();
                 }
                 catch (MySqlException ex)
                 {
@@ -96,12 +110,7 @@ namespace szepsegek
                 }
                 finally
                 {
-                    string query = "SELECT * FROM myTable";
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    MySqlDataReader reader = command.ExecuteReader();
-                    DataTable dataTable = new DataTable();
-                    dataTable.Load(reader);
-                    dtgUgyfelek.ItemsSource = dataTable.DefaultView;
+                    connection.Close();
                 }
             }
         }
