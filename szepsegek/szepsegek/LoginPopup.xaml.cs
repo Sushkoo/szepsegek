@@ -34,10 +34,6 @@ namespace szepsegek
                     parentWindow.Close(); // Close the popup window
                 }
             }
-            
-         
-
-
             else
             {
                 MessageBox.Show("Invalid credentials.");

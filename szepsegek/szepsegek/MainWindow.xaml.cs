@@ -19,6 +19,46 @@ namespace szepsegek
             DataContext = this;
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
+
+            void LoadDtg()
+            {
+                string selectQuery = "SELECT * FROM ugyfel";
+                MySqlCommand SelectCommand = new MySqlCommand(selectQuery, connection);
+                MySqlDataReader reader = SelectCommand.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+                dtgUgyfelek.ItemsSource = dataTable.DefaultView;
+            }
+
+            try
+            {
+                connection.Open();
+                LoadDtg();
+
+                foreach (Ugyfel item in Ugyfelek)
+                {
+                    string insertQuery = "INSERT INTO ugyfel (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
+
+                    MySqlCommand InsertCommand = new MySqlCommand(insertQuery, connection);
+
+                    InsertCommand.Parameters.AddWithValue("@column2", item.UgyfelNev);
+                    InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
+                    InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
+
+                    int affectedRows = InsertCommand.ExecuteNonQuery();
+
+                    Console.WriteLine("Inserted " + affectedRows + " row(s)");
+                }
+                LoadDtg();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
             InitializeComponent();
         }
 
@@ -70,48 +110,6 @@ namespace szepsegek
                 IDindex++;
 
                 popupAddElement.IsOpen = false;
-
-                MySqlConnection connection = new MySqlConnection(connectionString);
-
-                void LoadDtg()
-                {
-                    string selectQuery = "SELECT * FROM ugyfel";
-                    MySqlCommand SelectCommand = new MySqlCommand(selectQuery, connection);
-                    MySqlDataReader reader = SelectCommand.ExecuteReader();
-                    DataTable dataTable = new DataTable();
-                    dataTable.Load(reader);
-                    dtgUgyfelek.ItemsSource = dataTable.DefaultView;
-                }
-
-                try
-                {
-                    connection.Open();
-                    LoadDtg();
-
-                    foreach (Ugyfel item in Ugyfelek)
-                    {
-                        string insertQuery = "INSERT INTO ugyfel (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
-
-                        MySqlCommand InsertCommand = new MySqlCommand(insertQuery, connection);
-
-                        InsertCommand.Parameters.AddWithValue("@column2", item.UgyfelNev);
-                        InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
-                        InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
-
-                        int affectedRows = InsertCommand.ExecuteNonQuery();
-
-                        Console.WriteLine("Inserted " + affectedRows + " row(s)");
-                    }
-                    LoadDtg();
-                }
-                catch (MySqlException ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                }
             }
         }
 
