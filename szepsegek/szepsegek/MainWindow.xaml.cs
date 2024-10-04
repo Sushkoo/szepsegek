@@ -9,16 +9,13 @@ namespace szepsegek
 {
     public partial class MainWindow : Window
     {
-
-
+        string connectionString = "Server=localhost; Database=szepsegek; UserID=root; Password=;";
         public ObservableCollection<Ugyfel> Ugyfelek;
         private int IDindex = 0;
-        string connectionString = "Server=localhost;Database=mydatabase;UserID=myusername;Password=mypassword;";
         public MainWindow()
         {
             Ugyfelek = new ObservableCollection<Ugyfel>();
             DataContext = this;
-            string connectionString = "Server=localhost; Database=szepsegek; UserID=root; Password=;";
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
             InitializeComponent();
@@ -105,10 +102,8 @@ namespace szepsegek
                     DataTable dataTable = new DataTable();
                     dataTable.Load(reader);
                     dtgUgyfelek.ItemsSource = dataTable.DefaultView;
-                    connection.Close();
                 }
             }
-
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
