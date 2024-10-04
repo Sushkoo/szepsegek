@@ -10,11 +10,9 @@ namespace szepsegek
     {
 
         public int FoglalasID { get; set; }
-        public int SzolgaltatasID { get; set; }
-        public int DolgozoID { get; set; }
-        public int UgyfelID { get; set; }
-        public DateTime FoglalasKezdes { get; set; }
-        public DateTime FoglalasBefejezes { get; set; }
+        public int Szolgaltatas { get; set; }
+        public int DolgozoKeresztNev { get; set; }
+        public DateTime Idopont { get; set; }
 
 
     }
