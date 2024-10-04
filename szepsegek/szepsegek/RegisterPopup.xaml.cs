@@ -76,8 +76,6 @@ namespace szepsegek
                 parentWindow.DialogResult = true;
                 parentWindow.Close();
             }
-
-
         }
     }   
 }

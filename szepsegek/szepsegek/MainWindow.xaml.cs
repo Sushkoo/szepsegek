@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Data.SqlClient;
 using MySqlConnector;
+using System.Data;
+using System.Windows.Controls;
 
 namespace szepsegek
 {
@@ -11,7 +13,7 @@ namespace szepsegek
 
         public ObservableCollection<Ugyfel> Ugyfelek;
         private int IDindex = 0;
-
+        string connectionString = "Server=localhost;Database=mydatabase;UserID=myusername;Password=mypassword;";
         public MainWindow()
         {
             Ugyfelek = new ObservableCollection<Ugyfel>();
@@ -20,7 +22,7 @@ namespace szepsegek
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
             InitializeComponent();
-        }//Nagy kristóf buzi
+        }
 
     private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -38,6 +40,7 @@ namespace szepsegek
             {
                 // Show action buttons and hide login button
                 btnLogin.Visibility = Visibility.Collapsed;
+                btnRegister.Visibility = Visibility.Collapsed;
                 dtgUgyfelek.Visibility = Visibility.Visible;
                 btnUgyfelFelvetel.Visibility = Visibility.Visible;
                 btnEdit.Visibility = Visibility.Visible;
@@ -69,6 +72,41 @@ namespace szepsegek
                 IDindex++;
 
                 popupAddElement.IsOpen = false;
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                try
+                {
+                    connection.Open();
+
+                    foreach (Ugyfel item in Ugyfelek)
+                    {
+                        string query = "INSERT INTO Ugyfelek (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
+
+                        MySqlCommand command = new MySqlCommand(query, connection);
+
+                        command.Parameters.AddWithValue("@column2", item.UgyfelNev);
+                        command.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
+                        command.Parameters.AddWithValue("@column3", item.UgyfelEmail);
+
+                        int affectedRows = command.ExecuteNonQuery();
+
+                        Console.WriteLine("Inserted " + affectedRows + " row(s)");
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    string query = "SELECT * FROM myTable";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(reader);
+                    dtgUgyfelek.ItemsSource = dataTable.DefaultView;
+                    connection.Close();
+                }
             }
 
         }
@@ -122,38 +160,6 @@ namespace szepsegek
                 btnUgyfelFelvetel.Visibility = Visibility.Visible;
                 btnEdit.Visibility = Visibility.Visible;
                 btnRemove.Visibility = Visibility.Visible;
-            }
-
-            string connectionString = "Server=localhost;Database=mydatabase;UserID=myusername;Password=mypassword;";
-
-            MySqlConnection connection = new MySqlConnection(connectionString);
-
-            try
-            {
-                connection.Open();
-
-                foreach (Ugyfel item in Ugyfelek)
-                {
-                    string query = "INSERT INTO Ugyfelek (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
-
-                    MySqlCommand command = new MySqlCommand(query, connection);
-
-                    command.Parameters.AddWithValue("@column2", item.UgyfelNev);
-                    command.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
-                    command.Parameters.AddWithValue("@column3", item.UgyfelEmail);
-
-                    int affectedRows = command.ExecuteNonQuery();
-
-                    Console.WriteLine("Inserted " + affectedRows + " row(s)");
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-            }
-            finally
-            {
-                connection.Close();
             }
         }
     }
