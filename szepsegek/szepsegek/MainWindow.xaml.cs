@@ -120,7 +120,7 @@ namespace szepsegek
 
                     InsertCommand.Parameters.AddWithValue("@column2", item.UgyfelNev);
                     InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
-                    InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
+                   // InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
 
                     int affectedRows = InsertCommand.ExecuteNonQuery();
 
