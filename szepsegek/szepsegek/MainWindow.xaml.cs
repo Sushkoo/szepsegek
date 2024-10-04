@@ -37,7 +37,6 @@ namespace szepsegek
             {
                 connection.Open();
                 LoadDtg();
-                connection.Open();
                 foreach (Ugyfel item in Ugyfelek)
                 {
                     string insertQuery = "INSERT INTO ugyfel (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
