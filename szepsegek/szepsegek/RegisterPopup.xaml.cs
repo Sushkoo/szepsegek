@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySqlConnector;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,14 @@ using System.Windows.Shapes;
 
 namespace szepsegek
 {
-    
+
     /// <summary>
     /// Interaction logic for RegisterPopup.xaml
     /// </summary>
     public partial class RegisterPopup : UserControl
     {
-        public List<User> felhasznalok = new List<User>();
+        private string connectionString = "Server=localhost; Database=szepsegek; UserID=root; Password=;";
+
         public RegisterPopup()
         {
             InitializeComponent();
@@ -31,23 +33,6 @@ namespace szepsegek
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
 
-            User felhasznalo = new User();
-
-
-
-            if (felhasznalok.FindAll(x => x.UserName == felhasznalo.UserName).Count > 0)
-            {
-                felhasznalo.UserName = username;
-            }
-
-            if (felhasznalok.FindAll(x => x.UserPassword == felhasznalo.UserPassword).Count > 0)
-            {
-                felhasznalo.UserPassword = password;
-            }
-
-            Window parentWindow = Window.GetWindow(this);
-            
-
             // Simple validation example
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -55,21 +40,34 @@ namespace szepsegek
                 return; // Exit if either field is empty
             }
 
-
-            if (felhasznalok.Count() == 0)
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                felhasznalo.UserID = 0;
-                MessageBox.Show($"Sikeres regisztráció! {felhasznalo.UserID}");
+                connection.Open();
 
-            }
-            else
-            {
-                int lastid = felhasznalok.Select(x => x.UserID).Last();
-                felhasznalo.UserID = lastid + 1;
+                MySqlCommand command = new MySqlCommand("SELECT * FROM users WHERE username = @username", connection);
+                command.Parameters.AddWithValue("@username", username);
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    MessageBox.Show("Username already exists.");
+                    return;
+                }
+
+                reader.Close();
+
+                command = new MySqlCommand("INSERT INTO users (username, password, UserJogkor) VALUES (@username, @password, @UserJogkor)", connection);
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@UserJogkor", "ugyfel");
+
+                command.ExecuteNonQuery();
+
                 MessageBox.Show("Sikeres regisztráció!");
             }
 
-            felhasznalok.Add(felhasznalo);
+            Window parentWindow = Window.GetWindow(this);
 
             if (parentWindow != null)
             {
@@ -77,5 +75,5 @@ namespace szepsegek
                 parentWindow.Close();
             }
         }
-    }   
+    }
 }
