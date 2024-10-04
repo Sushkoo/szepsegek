@@ -45,7 +45,7 @@ namespace szepsegek
 
                     InsertCommand.Parameters.AddWithValue("@column2", item.UgyfelNev);
                     InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelTelefon);
-                    InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
+                    //InsertCommand.Parameters.AddWithValue("@column3", item.UgyfelEmail);
 
                     int affectedRows = InsertCommand.ExecuteNonQuery();
 
@@ -113,6 +113,7 @@ namespace szepsegek
                 foreach (Ugyfel item in Ugyfelek)
                 {
                     MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
                     string insertQuery = "INSERT INTO ugyfel (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
 
                     MySqlCommand InsertCommand = new MySqlCommand(insertQuery, connection);
