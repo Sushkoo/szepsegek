@@ -77,7 +77,7 @@ namespace szepsegek
 
                     foreach (Ugyfel item in Ugyfelek)
                     {
-                        string query = "INSERT INTO Ugyfelek (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
+                        string query = "INSERT INTO ugyfel (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
 
                         MySqlCommand command = new MySqlCommand(query, connection);
 
@@ -96,7 +96,7 @@ namespace szepsegek
                 }
                 finally
                 {
-                    string query = "SELECT * FROM myTable";
+                    string query = "SELECT * FROM ugyfel";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader reader = command.ExecuteReader();
                     DataTable dataTable = new DataTable();
