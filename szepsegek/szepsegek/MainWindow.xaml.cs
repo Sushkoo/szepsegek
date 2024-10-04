@@ -74,6 +74,16 @@ namespace szepsegek
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
 
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string selectQuery = "SELECT * FROM users";
+            MySqlCommand SelectCommand = new MySqlCommand(selectQuery, connection);
+            MySqlDataReader reader = SelectCommand.ExecuteReader();
+            DataTable dataTable = new DataTable();
+            dataTable.Load(reader);
+            dtgRegisztraltak.ItemsSource = dataTable.DefaultView;
+            connection.Close();
+
             // Show the login window and wait for the dialog result
             if (popupWindow.ShowDialog() == true) // We will set this true on successful login
             {
@@ -81,6 +91,7 @@ namespace szepsegek
                 btnLogin.Visibility = Visibility.Collapsed;
                 btnRegister.Visibility = Visibility.Collapsed;
                 dtgUgyfelek.Visibility = Visibility.Visible;
+                dtgRegisztraltak.Visibility = Visibility.Visible;
                 btnUgyfelFelvetel.Visibility = Visibility.Visible;
                 btnEdit.Visibility = Visibility.Visible;
                 btnRemove.Visibility = Visibility.Visible;
