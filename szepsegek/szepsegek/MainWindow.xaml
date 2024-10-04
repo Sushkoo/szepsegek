@@ -15,14 +15,15 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        
+
+
         <StackPanel Grid.RowSpan="2" x:Name="MainButtonPanel">
             <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click" Width="150" Margin="10"/>
             <Button x:Name="btnRegister" Content="Register" Click="btnRegister_Click" Width="150" Margin="10"/>
             <Button x:Name="btnUgyfelFelvetel" Content="Új ügyfél felvétele" Click="btnUgyfelFelvetel_Click" Visibility="Collapsed" Width="150" Margin="10"/>
             <Button x:Name="btnEdit" Content="Szerkesztés" Width="100" Click="Edit_Click" Margin="5" Visibility="Collapsed"/>
             <Button x:Name="btnRemove" Content="Törlés" Width="100" Click="Remove_Click" Margin="5" Visibility="Collapsed"/>
+            <Button x:Name="btnFoglalas" Content="Foglalás" Width="100" Margin="5" Click="btnFoglalas_Click" Visibility="Collapsed"></Button>
         </StackPanel>
         
         <DataGrid Grid.Column="1" Grid.Row="0" Visibility="Collapsed" x:Name="dtgUgyfelek" IsReadOnly="True" ItemsSource="{Binding Ugyfelek}"/>

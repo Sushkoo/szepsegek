@@ -95,6 +95,7 @@ namespace szepsegek
                 btnUgyfelFelvetel.Visibility = Visibility.Visible;
                 btnEdit.Visibility = Visibility.Visible;
                 btnRemove.Visibility = Visibility.Visible;
+                btnFoglalas.Visibility = Visibility.Visible;
             }
         }
 
@@ -192,7 +193,21 @@ namespace szepsegek
                 btnUgyfelFelvetel.Visibility = Visibility.Visible;
                 btnEdit.Visibility = Visibility.Visible;
                 btnRemove.Visibility = Visibility.Visible;
+                btnFoglalas.Visibility = Visibility.Visible;
             }
+        }
+
+        private void btnFoglalas_Click(object sender, RoutedEventArgs e)
+        {
+            var foglalasPopup = new RegisterPopup();
+            var popupWindow = new Window
+            {
+                Title = "Foglalas",
+                Content = foglalasPopup,
+                SizeToContent = SizeToContent.WidthAndHeight,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+                
+            };
         }
     }
 }
