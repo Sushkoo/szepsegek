@@ -17,12 +17,14 @@ namespace szepsegek
         void LoadDtg()
         {
             MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
             string selectQuery = "SELECT * FROM ugyfel";
             MySqlCommand SelectCommand = new MySqlCommand(selectQuery, connection);
             MySqlDataReader reader = SelectCommand.ExecuteReader();
             DataTable dataTable = new DataTable();
             dataTable.Load(reader);
             dtgUgyfelek.ItemsSource = dataTable.DefaultView;
+            connection.Close();
         }
 
         public MainWindow()
@@ -31,11 +33,11 @@ namespace szepsegek
             DataContext = this;
             InitializeComponent();
             MySqlConnection connection = new MySqlConnection(connectionString);
-            connection.Open();
             try
             {
+                connection.Open();
                 LoadDtg();
-
+                connection.Open();
                 foreach (Ugyfel item in Ugyfelek)
                 {
                     string insertQuery = "INSERT INTO ugyfel (UgyfelNev, UgyfelTelefon, UgyfelEmail) VALUES (@UgyfelNev, @UgyfelTelefon, @UgyfelEmail)";
