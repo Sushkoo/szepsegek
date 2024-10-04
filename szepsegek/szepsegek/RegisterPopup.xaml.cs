@@ -50,6 +50,15 @@ namespace szepsegek
             }
 
             // Step 3: Hash the Password
+            // Combine password bytes and salt
+            byte[] Combine(byte[] first, byte[] second)
+            {
+                byte[] result = new byte[first.Length + second.Length];
+                Buffer.BlockCopy(first, 0, result, 0, first.Length);
+                Buffer.BlockCopy(second, 0, result, first.Length, second.Length);
+                return result;
+            }
+
             string HashPassword(string password, byte[] salt)
             {
                 using (var sha256 = SHA256.Create())
